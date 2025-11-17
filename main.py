@@ -54,6 +54,15 @@ class TelegramBotBuilder:
         """Handle /start command with reply keyboard menu"""
         user = update.effective_user
         user_id = user.id
+        
+        # Register user in database
+        self.database.get_or_create_user(
+            telegram_id=user_id,
+            first_name=user.first_name,
+            last_name=user.last_name,
+            username=user.username
+        )
+        
         is_admin = self.is_admin(user_id)
         
         if is_admin:

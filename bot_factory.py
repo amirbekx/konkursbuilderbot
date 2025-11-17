@@ -165,6 +165,14 @@ class BotFactory:
         
         # Create bot in database immediately
         try:
+            # Ensure user exists in database before creating bot
+            self.database.get_or_create_user(
+                telegram_id=user_id,
+                first_name=update.effective_user.first_name,
+                last_name=update.effective_user.last_name,
+                username=update.effective_user.username
+            )
+            
             bot_id = self.database.create_bot(
                 user_id=user_id,
                 token=state['bot_data']['token'],
