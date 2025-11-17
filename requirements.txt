@@ -1,0 +1,27 @@
+# Telegram Bot Builder Requirements
+
+# Core Telegram Bot Library
+python-telegram-bot==20.7
+
+# Environment variables support
+python-dotenv==1.0.0
+
+# Database
+# SQLite comes with Python, but we can add SQLAlchemy for advanced features if needed
+# sqlalchemy==2.0.23
+
+# Async support (included with python-telegram-bot)
+asyncio
+
+# Logging and utilities
+python-dateutil==2.8.2
+
+# HTTP requests (if needed for additional features)
+requests==2.31.0
+
+# Excel file generation
+openpyxl==3.1.2
+
+# JSON handling (built-in to Python)
+# Additional utilities if needed
+typing-extensions==4.8.0
