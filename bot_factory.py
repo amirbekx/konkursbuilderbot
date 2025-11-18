@@ -204,12 +204,19 @@ class BotFactory:
             ]
             reply_markup = ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
             
+            # Generate referral link for the bot
+            bot_username = state['bot_data']['username']
+            referral_link = f"https://t.me/{bot_username}?start=ref_{user_id}"
+            
             await update.message.reply_text(
                 f"🎉 Bot muvaffaqiyatli yaratildi!\n\n"
                 f"📛 Nom: {bot_name}\n"
-                f"🤖 Username: @{state['bot_data']['username']}\n\n"
+                f"🤖 Username: @{bot_username}\n\n"
+                f"🔗 Sizning referal havolangiz:\n"
+                f"`{referral_link}`\n\n"
                 f"✅ Bot ishga tushirildi va foydalanishga tayyor!",
-                reply_markup=reply_markup
+                reply_markup=reply_markup,
+                parse_mode='Markdown'
             )
             
         except Exception as e:
