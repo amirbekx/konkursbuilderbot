@@ -265,8 +265,11 @@ class ContestManager:
         append_link: bool = True,
     ) -> str:
         """Inject dynamic placeholders into the referral share/follow-up text."""
+        # Escape underscores in referral link for Markdown
+        escaped_link = referral_link.replace('_', r'\_')
+        
         replacements = {
-            'link': referral_link,
+            'link': escaped_link,
             'count': str(referral_count),
             'first_name': (user.first_name or '') if user else '',
             'last_name': (user.last_name or '') if user else '',
@@ -281,7 +284,7 @@ class ContestManager:
 
         # Don't append link if already in template
         if append_link and '{link}' not in (template or ''):
-            formatted = formatted.rstrip() + f"\n\n🔗 {referral_link}"
+            formatted = formatted.rstrip() + f"\n\n🔗 {escaped_link}"
 
         return formatted
 
