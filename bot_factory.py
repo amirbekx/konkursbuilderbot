@@ -130,7 +130,8 @@ class BotFactory:
                 "❌ Noto'g'ri token! Botfather dan to'g'ri token oling."
             )
         except Exception as e:
-            logger.error(f"Error testing bot token: {e}")
+            # Don't log the full exception as it may contain sensitive data
+            logger.error(f"Error testing bot token: {type(e).__name__}")
             await update.message.reply_text(
                 "❌ Bot tokenini tekshirishda xatolik yuz berdi. Qayta urinib ko'ring."
             )
@@ -289,9 +290,12 @@ class BotFactory:
                 
                 try:
                     await self._start_contest_bot(bot_id, token)
-                    logger.info(f"Successfully started bot {bot_id} ({bot_data['name']})")
+                    # Log without exposing token
+                    bot_name = bot_data.get('name', 'Unknown')
+                    bot_username = bot_data.get('username', 'Unknown')
+                    logger.info(f"Successfully started bot {bot_id} (@{bot_username})")
                 except Exception as e:
-                    logger.error(f"Failed to start bot {bot_id}: {e}")
+                    logger.error(f"Failed to start bot {bot_id}: {str(e)}")
                     
         except Exception as e:
             logger.error(f"Error starting existing bots: {e}")

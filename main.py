@@ -1209,6 +1209,10 @@ class TelegramBotBuilder:
         else:
             bots = self.database.get_user_bots(user_id)
             logger.info(f"Regular admin - Found {len(bots)} bots for user {user_id}")
+            # Debug: log bot IDs
+            if bots:
+                bot_ids = [b['id'] for b in bots]
+                logger.info(f"Bot IDs for user {user_id}: {bot_ids}")
 
         if not bots:
             keyboard = [
